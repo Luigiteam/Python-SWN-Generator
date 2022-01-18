@@ -1,3 +1,6 @@
+#Credit Goes to Luigiteam on GitHub
+#https://github.com/Luigiteam/Python-SWN-Generator
+
 import mainLine
 import visual
 from tkinter import *

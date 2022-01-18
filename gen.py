@@ -1,3 +1,6 @@
+#Credit Goes to Luigiteam on GitHub
+#https://github.com/Luigiteam/Python-SWN-Generator
+
 import random
 import Main
 
