@@ -1,5 +1,5 @@
-#Credit Goes to Luigiteam on GitHub
-#https://github.com/Luigiteam/Python-SWN-Generator
+# Credit Goes to Luigiteam on GitHub
+# https://github.com/Luigiteam/Python-SWN-Generator
 
 import random
 import Main
@@ -752,7 +752,7 @@ def background_table(backnum, growth, learning, abilities):
                 learning -= 1
 
                 # Technician
-    
+
     # Technician
     if backnum == 13:
         abilities[1][3] += 1
@@ -1014,17 +1014,17 @@ def background_table(backnum, growth, learning, abilities):
 def Att(type, abilities):
     # Any Attribute
     if type == 0:
-        randoNum = [0,0,0,0,0,0]
+        randoNum = [0, 0, 0, 0, 0, 0]
         run = True
         a = 10
         while a > 0:
             while run:
-                rand = random.randint(0,5)
+                rand = random.randint(0, 5)
 
                 if randoNum[rand] == 0:
                     run = False
 
-            for i in range(0,6):
+            for i in range(0, 6):
                 if i == rand and abilities[i] < 18:
                     abilities[i] += 1
                     a = 0
@@ -1039,17 +1039,17 @@ def Att(type, abilities):
 
     # Physical Attributes
     elif type == 1:
-        randomNum = [0,0,0]
+        randomNum = [0, 0, 0]
         run = True
         a = 10
         while a > 0:
             while run:
-                rand = random.randint(0,2)
+                rand = random.randint(0, 2)
 
                 if randomNum[rand] == 0:
                     run = False
 
-            for i in range(0,3):
+            for i in range(0, 3):
                 if i == rand and abilities[i] < 17:
                     abilities[i] += 2
                     a = 0
@@ -1064,7 +1064,7 @@ def Att(type, abilities):
 
     # Mental Attributes
     else:
-        randomNum = [0,0,0,0,0,0]
+        randomNum = [0, 0, 0, 0, 0, 0]
         run = True
         a = 10
         while a > 0:
@@ -1074,7 +1074,7 @@ def Att(type, abilities):
                 if randomNum[rand] == 0:
                     run = False
 
-            for i in range(3,6):
+            for i in range(3, 6):
                 if i == rand and abilities[i] < 17:
                     abilities[i] += 2
                     a = 0
@@ -1176,10 +1176,33 @@ def Skills(type, Skills):
 
             a -= 1
 
+    # Non-Combat Skills
+    if type == 3:
+        randoNum = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, -1, 0, 0, 0, 0, 0]
+        a = 20
+        run = True
+        while a > 0:
+            while run:
+                rand = random.randint(1, 18)
+
+                if randoNum[rand - 1] == 0:
+                    run = False
+
+            for i in range(0, 19):
+                if i == rand and Skills[i] < 1:
+                    Skills[i] += 1
+                    a = 0
+                    break
+                elif i == rand and Skills[i] >= 1:
+                    randoNum[i] = -1
+                    run = True
+
+            a -= 1
+
     return Skills
 
 
-def Foci(type, foci):
+def Foci(type, Psy, foci, skillCheck):
     # Any Foci
     if type == 0:
         randoNum = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -1193,13 +1216,9 @@ def Foci(type, foci):
                     run = False
 
             for x in range(0, 23):
-                if x == rand and foci[x] < 2:
-                    foci[x] += 1
+                if x == rand and foci[3][x] < 2:
+                    foci[3][x] += 1
                     a = 0
-                    break
-                elif x == rand and foci[x] >= 2:
-                    randoNum[x] = -1
-                    run = True
 
             a -= 1
 
@@ -1217,58 +1236,58 @@ def Foci(type, foci):
 
             for x in range(1, 12):
 
-                if rand == 1 and foci[0] < 2:
-                    foci[0] += 1
+                if rand == 1 and foci[3][0] < 2:
+                    foci[3][0] += 1
                     a = 0
                     break
 
-                elif rand == 2 and foci[1] < 2:
-                    foci[1] += 1
+                elif rand == 2 and foci[3][1] < 2:
+                    foci[3][1] += 1
                     a = 0
                     break
 
-                elif rand == 3 and foci[2] < 2:
-                    foci[2] += 1
+                elif rand == 3 and foci[3][2] < 2:
+                    foci[3][2] += 1
                     a = 0
                     break
 
-                elif rand == 4 and foci[4] < 2:
-                    foci[4] += 1
+                elif rand == 4 and foci[3][4] < 2:
+                    foci[3][4] += 1
                     a = 0
                     break
 
-                elif rand == 5 and foci[8] < 2:
-                    foci[8] += 1
+                elif rand == 5 and foci[3][8] < 2:
+                    foci[3][8] += 1
                     a = 0
                     break
 
-                elif rand == 6 and foci[12] == 1:
-                    foci[12] += 1
+                elif rand == 6 and foci[3][12] == 1:
+                    foci[3][12] += 1
                     a = 0
                     break
 
-                elif rand == 7 and foci[14] < 2:
-                    foci[14] += 1
+                elif rand == 7 and foci[3][14] < 2:
+                    foci[3][14] += 1
                     a = 0
                     break
 
-                elif rand == 8 and foci[15] < 2:
-                    foci[15] += 1
+                elif rand == 8 and foci[3][15] < 2:
+                    foci[3][15] += 1
                     a = 0
                     break
 
-                elif rand == 9 and foci[16] < 2:
-                    foci[16] += 1
+                elif rand == 9 and foci[3][16] < 2:
+                    foci[3][16] += 1
                     a = 0
                     break
 
-                elif rand == 10 and foci[18] < 2:
-                    foci[18] += 1
+                elif rand == 10 and foci[3][18] < 2:
+                    foci[3][18] += 1
                     a = 0
                     break
 
-                elif rand == 11 and foci[20] < 2:
-                    foci[20] += 1
+                elif rand == 11 and foci[3][20] < 2:
+                    foci[3][20] += 1
                     a = 0
                     break
 
@@ -1290,53 +1309,53 @@ def Foci(type, foci):
                 if randoNum[rand - 1] == 0:
                     run = False
 
-            if rand == 1 and foci[3] < 2:
-                foci[3] += 1
+            if rand == 1 and foci[3][3] < 2:
+                foci[3][3] += 1
                 a = 0
                 break
 
-            elif rand == 2 and foci[5] < 2:
-                foci[5] += 1
+            elif rand == 2 and foci[3][5] < 2:
+                foci[3][5] += 1
                 a = 0
                 break
 
-            elif rand == 3 and foci[6] < 2:
-                foci[6] += 1
+            elif rand == 3 and foci[3][6] < 2:
+                foci[3][6] += 1
                 a = 0
                 break
 
-            elif rand == 4 and foci[7] < 2:
-                foci[7] += 1
+            elif rand == 4 and foci[3][7] < 2:
+                foci[3][7] += 1
                 a = 0
                 break
 
-            elif rand == 5 and foci[9] < 2:
-                foci[9] += 1
+            elif rand == 5 and foci[3][9] < 2:
+                foci[3][9] += 1
                 a = 0
                 break
 
-            elif rand == 6 and foci[10] < 2:
-                foci[10] += 1
+            elif rand == 6 and foci[3][10] < 2:
+                foci[3][10] += 1
                 a = 0
                 break
 
-            elif rand == 7 and foci[11] < 2:
-                foci[11] += 1
+            elif rand == 7 and foci[3][11] < 2:
+                foci[3][11] += 1
                 a = 0
                 break
 
-            elif rand == 8 and foci[17] < 2:
-                foci[17] += 1
+            elif rand == 8 and foci[3][17] < 2:
+                foci[3][17] += 1
                 a = 0
                 break
 
-            elif rand == 9 and foci[18] < 2:
-                foci[18] += 1
+            elif rand == 9 and foci[3][18] < 2:
+                foci[3][18] += 1
                 a = 0
                 break
 
-            elif rand == 10 and foci[19] < 2:
-                foci[19] += 1
+            elif rand == 10 and foci[3][19] < 2:
+                foci[3][19] += 1
                 a = 0
                 break
 
@@ -1346,7 +1365,166 @@ def Foci(type, foci):
 
             a -= 1
 
-    return foci
+    # Skills Check
+
+    if foci[3][0] == 1 and skillCheck[0] == 0 and foci[1][1] < 1:
+        foci[1][1] += 1
+        skillCheck[0] = -1
+
+    if foci[3][1] == 1 and skillCheck[1] == 0 and foci[1][14] < 1:
+        foci[1][14] += 1
+        skillCheck[1] = -1
+
+    if foci[3][2] == 1 and skillCheck[2] == 0 and foci[1][13] < 1:
+        foci[1][13] += 1
+        skillCheck[2] = -1
+
+    if foci[3][3] == 1 and skillCheck[4] == 0 and foci[1][6] < 1:
+        foci[1][6] += 1
+        skillCheck[4] = -1
+
+    if foci[3][4] and skillCheck[3] == 0:
+        skillCheck[3] = -1
+        a = 6
+        randoNum = [0, 0, 0]
+        run = True
+        while a > 0:
+            if randoNum == [0, 0, 0]:
+                break
+
+            while run:
+                rand = random.randint(1, 3)
+
+                if randoNum[rand - 1] == 0:
+                    run = False
+
+            if rand == 1 and foci[1][11] < 1:
+                foci[1][11] += 1
+                a = 0
+
+            elif rand == 2 and foci[1][12] < 1:
+                foci[1][12] += 1
+                a = 0
+
+            elif rand == 3 and foci[14] < 1:
+                foci[1][14] += 1
+                a = 0
+
+            elif rand == 1 and foci[11] >= 1:
+                randoNum[0] = -1
+                run = True
+
+            elif rand == 2 and foci[12] >= 1:
+                randoNum[1] = -1
+                run = True
+
+            elif rand == 3 and foci[14] >= 1:
+                randoNum[2] = -1
+                run = True
+
+            elif x == rand and foci[x] >= 2:
+                randoNum[x] = -1
+                run = True
+                a = 0
+                break
+
+            a -= 1
+
+    if foci[3][6] == 1 and skillCheck[5] == 0 and foci[1][1] < 1:
+        foci[1][1] += 1
+        skillCheck[5] = -1
+
+    # x = 6 is Die Hard which has no added skill
+
+    if foci[3][7] == 1 and skillCheck[7] == 0 and foci[1][16] < 1:
+        foci[1][16] += 1
+        skillCheck[7] = -1
+
+    if foci[3][8] == 1 and skillCheck[8] == 0 and foci[1][12] < 1:
+        foci[1][12] += 1
+        skillCheck[8] = -1
+
+    if foci[3][9] == 1 and skillCheck[9] == 0 and foci[1][10] < 1:
+        foci[1][10] += 1
+        skillCheck[9] = -1
+
+    if foci[3][10] == 1 and skillCheck[10] == 0 and foci[1][4] < 1:
+        foci[1][4] += 1
+        skillCheck[10] = -1
+
+    if foci[3][11] == 1 and skillCheck[11] == 0 and foci[1][6] < 1:
+        foci[1][6] += 1
+        skillCheck[11] = -1
+
+    # Iron Hide [12], skillcheck[12] Does not have a free skill
+
+    if foci[3][13] == 1 and skillCheck[13] == 0:
+        foci[3] = Skills(2, foci[3])
+        skillCheck[13] = -1
+
+    if foci[3][14] == 1 and skillCheck[14] == 0 and foci[1][14] < 1:
+        foci[1][14] += 1
+        skillCheck[14] = -1
+
+    if foci[3][15] == 1 and skillCheck[15] == 0 and foci[1][11] < 1 or foci[1][14] < 1:
+        a = 3
+        randoNum = [0, 0]
+        run = True
+        while a > 0:
+            while run:
+                rand = random.randint(0, 1)
+
+                if randoNum[rand] == 0:
+                    run = False
+
+            if rand == 0 and foci[1][11] < 1:
+                foci[1][11] += 1
+                break
+
+            elif rand == 1 and foci[1][14] < 1:
+                foci[1][14] += 1
+                break
+
+            elif rand == 0 and foci[1][11] >= 1:
+                randoNum[0] = -1
+                run = True
+
+            elif rand == 1 and foci[1][14] >= 1:
+                randoNum[1] = -1
+                run = True
+            
+            if randoNum == [-1,-1]:
+                break
+
+    if foci[3][16] == 1 and skillCheck[16] == 0 and foci[1][12] < 1:
+        foci[1][12] += 1
+        skillCheck[16] = -1
+
+    if foci[3][17] == 1 and skillCheck[17] == 0:
+        foci[1] = Skills(3, foci[1])
+        skillCheck[16] = -1
+
+    if foci[3][18] == 1 and skillCheck[18] == 0 and foci[1][6] < 1:
+        foci[1][6] += 1
+        skillCheck[18] = -1
+
+    if foci[3][19] == 1 and skillCheck[19] == 0 and foci[1][9] < 1:
+        foci[1][9] += 1
+        skillCheck[19] = -1
+
+    if foci[3][20] == 1 and skillCheck[20] == 0 and foci[1][3] < 1:
+        foci[1][3] += 1
+        skillCheck[20] = -1
+
+    if foci[3][21] == 1 and skillCheck[21] == 0 and foci[1][11] < 1:
+        foci[1][11] += 1
+        skillCheck[21] = -1
+
+    if foci[3][22] == 1 and skillCheck[22] == 0 and Psy < 1:
+        foci[3] = Skills(2, foci[3])
+        skillCheck[22] = -1
+
+    return foci, skillCheck
 
 
 def Equipment(equip, credits):

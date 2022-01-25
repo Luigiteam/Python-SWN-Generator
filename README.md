@@ -1,8 +1,10 @@
 # Python-SWN-Generator
 This is a generator for SWN in Python
 
-If you open in a terminal, It will show all that is generated, the GUI only shows skills (For the time being).
+The terminal will show all that is generated, the GUI only shows skills (For the time being).
 
-You can use my modules for your own code, but please credit me if you plan on using it.
+You can use my modules for your own code, but please credit me if you plan on using them.
 
-The version that this is on is **0.1**
+You need Python to run this program, you can download it at https://www.python.org/downloads/
+
+The version that this is on is **0.1.1**

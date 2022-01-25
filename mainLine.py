@@ -128,14 +128,15 @@ def Gen():
     chaMOD = gen.attribute_mod(1, CHA)
 
     # Foci Stage
+    skill_Check = [0,0,0,0,0,0,0,-1,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0]
 
-    Abillities[3] = gen.Foci(0, Abillities[3])
+    Abillities,skill_Check = gen.Foci(0, Psy, Abillities, skill_Check)
 
     if Exp >= 1:
-        Abillities[3] = gen.Foci(2, Abillities[3])
+        Abillities,skill_Check = gen.Foci(2, Psy, Abillities, skill_Check)
 
     if War >= 1:
-        Abillities[3] = gen.Foci(1, Abillities[3])
+        Abillities,skill_Check = gen.Foci(1, Psy, Abillities, skill_Check)
 
     # Extra Skill
 
@@ -221,8 +222,8 @@ def Gen():
     print("Skills:  ")
     print(Abillities[1])
     # SAVE: P[4],E[5],M[6],AC[7],AB[8],Effort[9]FullName[10],Backprint[11],BackprintNUM[12],Credits[13],Equipment[14]
-    return Abillities[0], Abillities[1], Abillities[2], Abillities[
-        3], saveP, saveE, saveM, ac, ab, Effort, FullName, Backprint, BackprintNUM, Credits, Equipment
+    return [Abillities[0], Abillities[1], Abillities[2], Abillities[
+        3], saveP, saveE, saveM, ac, ab, Effort, FullName, Backprint, BackprintNUM, Equipment]
 
 
 if __name__ == '__main__':
