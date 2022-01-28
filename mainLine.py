@@ -158,7 +158,7 @@ def Gen():
     elif CONmod >= WISmod:
         Effort = 1 + gen.Array_Maximum(Abillities[2], len(Abillities[2])) + CONmod
 
-    #   HP
+    #   HP and SS
     hp = random.randint(1, 6) + CONmod
 
     if War >= 1:
@@ -174,11 +174,13 @@ def Gen():
     else:
         ab = 0
 
+    ss = Abillities[0][5]
+
     # Equipment
     Equipment = None
     Credits = None
 
-    Equipment = gen.Equipment(Equipment, Credits)
+    Equipment, Credits = gen.Equipment(Equipment, Credits)
 
     #   AC
     if Abillities[3][12] >= 1:
@@ -207,6 +209,7 @@ def Gen():
         saveM = 15 - CHAmod
 
     # Name Stage
+   
     FullName = name_gen.names()
 
     # Print Stage
@@ -221,9 +224,14 @@ def Gen():
 
     print("Skills:  ")
     print(Abillities[1])
-    # SAVE: P[4],E[5],M[6],AC[7],AB[8],Effort[9]FullName[10],Backprint[11],BackprintNUM[12],Credits[13],Equipment[14]
-    return [Abillities[0], Abillities[1], Abillities[2], Abillities[
-        3], saveP, saveE, saveM, ac, ab, Effort, FullName, Backprint, BackprintNUM, Equipment]
+    # SAVE: array[4] P[0],E[0], and M[0]. array [5] AC[0], and AB[1] 
+    # array [6], Effort[0], FullName[1], Backprint[2], and BackprintNUM[3],
+    # array [7][War[0], Exp[1], and Psy[2],
+    # Credits[8],Equipment[9],
+    # Array[10] hp[0], ss[1]
+    return [Abillities[0], Abillities[1], Abillities[2], Abillities[3], 
+    [saveP, saveE, saveM], [ac, ab], [Effort, FullName, Backprint, BackprintNUM], 
+    [War,Exp,Psy],Credits, Equipment,[hp,ss]]
 
 
 if __name__ == '__main__':

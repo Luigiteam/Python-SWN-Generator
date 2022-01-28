@@ -4,28 +4,45 @@
 from tkinter import *
 import Main
 
-def Window(Abillities):
+def Window(Abillities,level):
 
-    window = Tk()
+    window = Tk()    
+
+    # Has Name, Level and class, background, hp and ss
+    Other = Frame(window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150)
+    other_Print(Other,Abillities,level)
+    Other.place(x = 5, y = 5)
+    Other.propagate(0)
+
+    window.update_idletasks()
+    other_Width = Other.winfo_width()
+    other_Height = Other.winfo_height()
+
+    Saves = Frame(window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150)
+    Saves = saves_Print(Saves,Abillities[4])
+    Saves.place(x = other_Width + 10, y = 5)
 
     Skills = Frame(window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150)
-    Skills.place(x = 160, y = 5)
+    skills_Print(Skills,Abillities[1])
+    Skills.place(x = 5, y = other_Height + 10)
     Skills.pack_propagate(0) 
 
-    tagS = Label(Skills).grid(row=0,column=0)
+    Psy = None
 
+    if Abillities[7][2] > 0:
+        Psy = Frame(window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150)   
+
+    Foci = Frame(window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150) 
 
     Label(Skills,text="Skills: ").grid(row=0,column=0)
-    test = None
-    test = skills_Print(Skills,Abillities[1])
-    
 
     
 
     window.geometry("840x600")
     window.resizable(0,0)
-    
+
     window.mainloop()
+    
 
 def recenter(stat,Col,Row):
     if stat == 5:
@@ -184,6 +201,63 @@ def skills_Print(Frame,skills):
 
 
     return Frame
+
+def psy_Print(Frame,Psy):
+    pass
+
+def foci_Print(Frame,foci):
+    pass
+
+def other_Print(Frame,other,level):
+
+    #Full Name
+    Label(Frame,text=other[6][1]).grid(row=0,column=0)
+
+    #Level and Class
+    if other[7][0] == 2:
+        Label(Frame,text="Level " + str(level) + " | Full Warrior").grid(row=1,column=0)
+    
+    elif other[7][1] == 2:
+        Label(Frame,text="Level " + str(level) + " | Full Expert").grid(row=1,column=0)
+    
+    elif other[7][2] == 2:
+        Label(Frame,text="Level " + str(level) + " | Full Psychic").grid(row=1,column=0)
+
+    elif other[7][0] == 1 and other[7][1] == 1:
+        Label(Frame,text="Level " + str(level) + " | Half Warrior Half Expert").grid(row=1,column=0)
+    
+    elif other[7][0] == 1 and other[7][2] == 1:
+        Label(Frame,text="Level " + str(level) + " | Half Warrior Half Psychic").grid(row=1,column=0)
+    
+    elif other[7][1] == 1 and other[7][2] == 1:
+        Label(Frame,text="Level " + str(level) + " | Half Expert Half Psychic").grid(row=1,column=0)
+
+    #Background
+    Label(Frame,text="Background: " + other[6][2]).grid(row=2,column=0)
+
+    #HP and SS
+    Label(Frame,text="HP: " + str(other[10][0]) + "/" + str(other[10][0])
+            + " | SS: 0/" + str(other[10][1])).grid(row=3,column=0)
+
+
+
+    return Frame
+
+def saves_Print(Frame,saves):
+    # SAVE: array[4] P[0],E[1], and M[2]. array [5] AC[0], and AB[1] 
+    # array [6], Effort[0], FullName[1], Backprint[2], and BackprintNUM[3],
+    # array [7][War[0], Exp[1], and Psy[2],
+    # Credits[8],Equipment[9],
+    # Array[10] hp[0], ss[1]
+    
+    Label(Frame, text="Saving Throws: ").grid(row=0,column=0)
+
+    Label(Frame,text="Physical: " + str(saves[0])).grid(row=1,column=0)
+    Label(Frame,text="Evasion: " + str(saves[1])).grid(row=2,column=0)
+    Label(Frame,text="Mental: " + str(saves[2])).grid(row=3,column=0)
+
+    return Frame
+    
 
 if __name__ == '__main__':
     Main.main()
