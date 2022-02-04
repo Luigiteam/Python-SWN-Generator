@@ -1,6 +1,7 @@
 #Credit Goes to Luigiteam on GitHub
 #https://github.com/Luigiteam/Python-SWN-Generator
 
+from re import A
 import Main
 import random
 import json
@@ -59,9 +60,17 @@ def names():
                     tempF = random.choice(data['IFF'])
             else:
                 tempL = random.choice(data['IL'])
+        
+        elif rand == 6:
+            if i == 1:
+                if gender == 0:
+                    tempF = random.choice(data['JMF'])
+                else:
+                    tempF = random.choice(data['JFF'])
+            else:
+                tempL = random.choice(data['JL'])
 
     return tempF + tempL
-
 
 if __name__ == '__main__':
     Main.main()

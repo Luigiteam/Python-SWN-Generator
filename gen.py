@@ -1205,7 +1205,7 @@ def Skills(type, Skills):
 def Foci(type, Psy, foci, skillCheck):
     # Any Foci
     if type == 0:
-        randoNum = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        randoNum = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         run = True
         a = 23
         while a > 0:
@@ -1215,10 +1215,14 @@ def Foci(type, Psy, foci, skillCheck):
                 if randoNum[rand] == 0:
                     run = False
 
-            for x in range(0, 23):
+            for x in range(0, 24):
                 if x == rand and foci[3][x] < 2:
                     foci[3][x] += 1
                     a = 0
+                
+                elif x == rand and foci[3][x] == 2:
+                    randoNum[x] = -1
+                    run = True
 
             a -= 1
 
@@ -1359,6 +1363,11 @@ def Foci(type, Psy, foci, skillCheck):
                 a = 0
                 break
 
+            elif rand == 11 and foci[3][20] < 2:
+                foci[3][20] += 1
+                a = 0
+                break
+
             else:
                 randoNum[rand - 1] = -1
                 run = True
@@ -1367,8 +1376,8 @@ def Foci(type, Psy, foci, skillCheck):
 
     # Skills Check
 
-    if foci[3][0] == 1 and skillCheck[0] == 0 and foci[1][1] < 1:
-        foci[1][1] += 1
+    if foci[3][0] == 1 and skillCheck[0] == 0 and foci[1][7] < 1:
+        foci[1][7] += 1
         skillCheck[0] = -1
 
     if foci[3][1] == 1 and skillCheck[1] == 0 and foci[1][14] < 1:
@@ -1430,11 +1439,12 @@ def Foci(type, Psy, foci, skillCheck):
 
             a -= 1
 
-    if foci[3][6] == 1 and skillCheck[5] == 0 and foci[1][1] < 1:
+    if foci[3][5] and skillCheck[4] == 0 and foci[1][1] < 1:
         foci[1][1] += 1
-        skillCheck[5] = -1
+        skillCheck[5] -= 1
 
     # x = 6 is Die Hard which has no added skill
+    skillCheck[6] = -1
 
     if foci[3][7] == 1 and skillCheck[7] == 0 and foci[1][16] < 1:
         foci[1][16] += 1
