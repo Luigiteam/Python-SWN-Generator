@@ -6,6 +6,7 @@ import Main
 
 
 def attribute_gen():
+    """Simulates generating attributes with 3 seperate die"""
     i = 3
     att = 0
     while i > 0:
@@ -15,6 +16,8 @@ def attribute_gen():
 
 
 def attribute_mod(type, att):
+    """If Given 0 for the type, it'll return an int of the mod"""
+    """If Given 1 for the type, it'll return a string of the mod"""
     if type == 0:
 
         if att == 3:
@@ -50,6 +53,7 @@ def attribute_mod(type, att):
 
 
 def background_pick(rand):
+    """Returns the string form of a charactor's background"""
     # Does not have Clergy, Courtesan, Dilettante and Politican backgrounds
     if rand == 1:
         return "Barbarian"
@@ -101,6 +105,9 @@ def background_pick(rand):
 
 
 def background_table(backnum, growth, learning, abilities):
+    """This changes numbers in the array given 
+       depending on what background is given"""
+
     # Barbarian
     if backnum == 1:
 
@@ -1012,6 +1019,10 @@ def background_table(backnum, growth, learning, abilities):
 
 
 def Att(type, abilities):
+    """type - 0: This adds any attribute by 1
+       type - 1: This adds pysical attributes by 2
+       type - 2: This adds metal attributes by 2"""
+
     # Any Attribute
     if type == 0:
         randoNum = [0, 0, 0, 0, 0, 0]
@@ -1604,6 +1615,8 @@ def Equipment(equip, credits):
 
 
 def Array_Maximum(Array, Length):
+    """This returns the max number"""
+
     max = Array[0]
 
     for i in range(1, Length):

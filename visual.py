@@ -3,10 +3,17 @@
 
 from tkinter import *
 import Main
+import gen
 
 def Window(Abillities,level):
+    # SAVE: array[4] P[0],E[1], and M[2]. array [5] AC[0], and AB[1] 
+    # array [6], Effort[0], FullName[1], Backprint[2], and BackprintNUM[3],
+    # array [7][War[0], Exp[1], and Psy[2],
+    # Credits[8],Equipment[9],
+    # Array[10] hp[0], ss[1]
 
-    window = Tk()    
+    window = Tk()
+    window.title("SWN Character Generator 0.4")   
 
     # Has Name, Level and class, background, hp and ss
     Other = Frame(window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150)
@@ -18,40 +25,44 @@ def Window(Abillities,level):
     other_Width = Other.winfo_width()
     other_Height = Other.winfo_height()
 
+    # Has Saving throws
     Saves = Frame(window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150)
     Saves = saves_Print(Saves,Abillities[4])
     Saves.place(x = other_Width + 10, y = 5)
 
-
-
-    Skills = Frame(window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150)
+    Skills = Frame(window,bd=9,highlightbackground="blue",highlightthickness=2,height=175,width=150)
     Label(Skills,text="Skills: ").grid(row=0,column=0)
     Skills = skills_Print(Skills,Abillities[1])
     Skills.place(x = 5, y = other_Height + 10)
-    Skills.pack_propagate(0) 
+    Skills.pack_propagate(0)
 
     window.update_idletasks()
     skill_Width = Skills.winfo_width()
+    skill_Height = Skills.winfo_height()
 
-    Foci = Frame(window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150)
+    saves_Width = Saves.winfo_width()
+
+    Foci = Frame(window,bd=9,highlightbackground="blue",highlightthickness=2,height=175,width=150)
     Label(Foci,text="Foci:").grid(row=0,column=0)
     Foci = foci_Print(Foci,Abillities[3])
     Foci.place(x=skill_Width + 10,y=other_Height + 10)
 
-    Psy = None
-
-    if Abillities[7][2] > 0:
-        Psy = Frame(window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150)   
-
-
+    Psy = Frame(window,bd=9,highlightbackground="blue",highlightthickness=2,height=175,width=150)
     
+    if Abillities[7][2] >= 1:
+        Label(Psy,text="Psionics: ").grid(row=0,column=0)
+        Psy = psy_Print(Psy,Abillities[2]) 
+        Psy.place(x = 5, y = skill_Height + other_Height + 15)
+
+    Attributes = Frame(window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150)
+    Attributes = attributes_Print(Attributes,Abillities[0])
+    Attributes.place(x = other_Width + saves_Width + 15, y = 5)
 
     window.geometry("840x600")
     window.resizable(0,0)
 
     window.mainloop()
     
-
 def recenter(stat,row):
     col = None
     if stat == 5:
@@ -175,7 +186,41 @@ def skills_Print(Frame,skills):
     return Frame
 
 def psy_Print(Frame,Psy):
-    pass
+    Row = 1
+    Col = 0
+    stat = 0
+    for i in range(0,6):
+        if i == 0 and Psy[0] >= 0:
+            Label(Frame,text="Biopsionics level " + str(Psy[0])).grid(row=Row,column=Col)
+            Row += 1
+            stat += 1
+
+        if i == 1 and Psy[1] >= 0:
+            Label(Frame,text="Metapsionics level " + str(Psy[1])).grid(row=Row,column=Col)
+            Row += 1
+            stat += 1
+
+        if i == 2 and Psy[2] >= 0:
+            Label(Frame,text="Precognition level " + str(Psy[2])).grid(row=Row,column=Col)
+            Row += 1
+            stat += 1
+        
+        if i == 3 and Psy[3] >= 0:
+            Label(Frame,text="Telekinesis level " + str(Psy[3])).grid(row=Row,column=Col)
+            Row += 1
+            stat += 1
+        
+        if i == 4 and Psy[4] >= 0:
+            Label(Frame,text="Telepathy level " + str(Psy[4])).grid(row=Row,column=Col)
+            Row += 1
+            stat += 1
+        
+        if i == 5 and Psy[5] >= 0:
+            Label(Frame,text="Teleportation level " + str(Psy[5])).grid(row=Row,column=Col)
+
+        Row, Col = recenter(stat,Row)
+
+    return Frame
 
 def foci_Print(Frame,foci):
     stat = 0
@@ -345,12 +390,6 @@ def other_Print(Frame,other,level):
     return Frame
 
 def saves_Print(Frame,saves):
-    # SAVE: array[4] P[0],E[1], and M[2]. array [5] AC[0], and AB[1] 
-    # array [6], Effort[0], FullName[1], Backprint[2], and BackprintNUM[3],
-    # array [7][War[0], Exp[1], and Psy[2],
-    # Credits[8],Equipment[9],
-    # Array[10] hp[0], ss[1]
-    
     Label(Frame, text="Saving Throws: ").grid(row=0,column=0)
 
     Label(Frame,text="Physical: " + str(saves[0])).grid(row=1,column=0)
@@ -358,6 +397,28 @@ def saves_Print(Frame,saves):
     Label(Frame,text="Mental: " + str(saves[2])).grid(row=3,column=0)
 
     return Frame
+    
+def attributes_Print(Frame,Stats):
+    
+    strMod = gen.attribute_mod(1,Stats[0])
+    dexMod = gen.attribute_mod(1,Stats[1])
+    conMod = gen.attribute_mod(1,Stats[2])
+    intMod = gen.attribute_mod(1,Stats[3])
+    wisMod = gen.attribute_mod(1,Stats[4])
+    chaMod = gen.attribute_mod(1,Stats[5])
+    
+    Label(Frame,text="Attributes").grid(row=0,column=0)
+
+    Label(Frame,text="STR: " + str(Stats[0]) + strMod).grid(row=1,column=0)
+    Label(Frame,text="DEX: " + str(Stats[1]) + dexMod).grid(row=1,column=1)
+    Label(Frame,text="CON: " + str(Stats[2]) + conMod).grid(row=1,column=2)
+    Label(Frame,text="INT: " + str(Stats[3]) + intMod).grid(row=1,column=3)
+    Label(Frame,text="WIS: " + str(Stats[4]) + wisMod).grid(row=1,column=4)
+    Label(Frame,text="CHA: " + str(Stats[5]) + chaMod).grid(row=1,column=5)
+    
+    return Frame
+    
+
     
 
 if __name__ == '__main__':
