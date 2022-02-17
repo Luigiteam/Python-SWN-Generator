@@ -1554,7 +1554,7 @@ def Equipment(equip, credits):
     if rand == 1:
         # Barbarian
         equip = ["Spear (1d6 + 1 damage)", "Primitive Hide Armor (AC 13)",
-                 "Primitive Sheild (+1 AC)", "Knife (1d4)", "Backpack", "7 Day Rations", "20m Rope"]
+                 "Primitive Sheild (+1 AC)", "Knife (1d4 damage)", "Backpack", "7 Day Rations", "20m Rope"]
         credits = 500
 
     elif rand == 2:
@@ -1584,7 +1584,7 @@ def Equipment(equip, credits):
 
     elif rand == 6:
         # Soldier
-        equip = ["Combat Rifle (1d12 damage)", "Woven Body Armor (AC 15)", "Knife (1d4)",
+        equip = ["Combat Rifle (1d12 damage)", "Woven Body Armor (AC 15)", "Knife (1d4 damage)",
                  "80 Rounds of Ammo", "Backpack", "Compad"]
         credits = 100
 

@@ -1,7 +1,6 @@
 #Credit Goes to Luigiteam on GitHub
 #https://github.com/Luigiteam/Python-SWN-Generator
 
-from re import A
 import Main
 import random
 import json

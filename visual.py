@@ -1,7 +1,11 @@
 #Credit Goes to Luigiteam on GitHub
 #https://github.com/Luigiteam/Python-SWN-Generator
 
+from cgitb import text
+from distutils.command.build import build
+from email.encoders import encode_quopri
 from tkinter import *
+from typing import Collection
 import Main
 import gen
 
@@ -58,7 +62,27 @@ def Window(Abillities,level):
     Attributes = attributes_Print(Attributes,Abillities[0])
     Attributes.place(x = other_Width + saves_Width + 15, y = 5)
 
-    window.geometry("840x600")
+    Equipment = Frame(window,bd=9,highlightbackground="red",highlightthickness=2)
+    Weapons = Frame(window,bd=9,highlightbackground="red",highlightthickness=2,height=175,width=150)
+    Armor = Frame(window,bd=9,highlightbackground="red",highlightthickness=2,height=175,width=150)
+
+    Equipment,Weapons,Armor = equipment_Print(Equipment,Weapons,Armor,Abillities[8],Abillities[9])
+    window.update_idletasks()
+
+    attributeSize = Attributes.winfo_x() + Attributes.winfo_width()
+
+    Equipment.place(x = attributeSize + 20, y = 5)
+    
+    window.update_idletasks()
+    equipHeight = Equipment.winfo_height()
+
+    Weapons.place(x = attributeSize + 20, y = equipHeight + 10)
+    window.update_idletasks()
+    armor_equip_Height = equipHeight + Weapons.winfo_height()
+
+    Armor.place(x = attributeSize + 20, y = armor_equip_Height + 15)
+
+    window.geometry("975x600")
     window.resizable(0,0)
 
     window.mainloop()
@@ -418,8 +442,91 @@ def attributes_Print(Frame,Stats):
     
     return Frame
     
-
+def equipment_Print(equipFrame,weaponFrame,armorFrame,credits,equipment):
+    i = len(equipment) - 1
+    temp = [0]
+    while i > 0:
+        temp.append(0)
+        i -= 1
     
+    Row = 1
+    
+    #Weapons
+    Label(weaponFrame,text="Weapons: ").grid(row=0,column=0)
+    i = len(equipment) - 1
+    k = 0
+    while i > -1:
+        if equipment[i] == "Spear (1d6 + 1 damage)" or equipment[i] == "Knife (1d4 damage)" or equipment[i] == "Monoblade Sword (1d8 + 1 damage)" or equipment[i] == "Thermal Knife (1d6 damage)" or equipment[i] == "Laser Pistol (1d6 damage)" or equipment[i] == "Monoblade Knife (1d6 damage)" or equipment[i] == "Combat Rifle (1d12 damage)" or equipment[i] == "Laser Rifle (1d10)" and temp[i] == 0:
+            Label(weaponFrame,text=equipment[i]).grid(row=Row,column=0)
+            temp[i] = -1
+            Row += 1
+            k += 1
+
+        i -= 1
+    
+    if k == 0:
+        Label(weaponFrame,text="None").grid(row=1,column=0)
+
+    Row = 1
+
+    #Armor
+    Label(armorFrame,text="Armor: ").grid(row=0,column=0)
+    ac = 10
+    i = len(equipment) - 1
+    while i > -1:
+        if equipment[i] == "Primitive Hide Armor (AC 13)" and temp[i] == 0:
+            ac = 13
+            Label(armorFrame,text=equipment[i]).grid(row=Row,column=0)
+            Row += 1
+            temp[i] = -1
+
+        if equipment[i] == "Woven Body Armor (AC 15)" and temp[i] == 0:
+            ac = 15
+            Label(armorFrame,text=equipment[i]).grid(row=Row,column=0)
+            Row += 1
+            temp[i] = -1
+
+        if equipment[i] == "Secure Clothing (AC 13)" and temp[i] == 0:
+            ac == 13
+            Label(armorFrame,text=equipment[i]).grid(row=Row,column=0)
+            Row += 1
+            temp[i] = -1
+
+        if equipment[i] == "Armored Undersuit (AC 13)" and temp[i] == 0:
+            ac == 13
+            Label(armorFrame,text=equipment[i]).grid(row=Row,column=0)
+            Row += 1
+            temp[i] = -1
+
+        if equipment[i] == "Armored Vacc Suit (AC 13)" and temp[i] == 0:
+            ac = 13
+            Label(armorFrame,text=equipment[i]).grid(row=Row,column=0)
+            Row += 1
+            temp[i] = -1
+
+        if equipment[i] == "Primitive Sheild (+1 AC)" and temp[i] == 0:
+            ac += 1
+            Label(armorFrame,text=equipment[i]).grid(row=Row,column=0)
+            Row += 1
+            temp[i] = -1
+        
+        i -= 1
+
+    Label(armorFrame,text="AC: " + str(ac)).grid(row=Row,column=0)
+
+    #Equipment
+    Label(equipFrame,text="Equipment: ").grid(row=0,column=0)
+    i = len(equipment) - 1
+    while i > -1:
+
+        if temp[i] == 0:
+            Label(equipFrame,text=equipment[i]).grid(row=Row,column=0)
+            Row += 1
+            temp[i] = -1
+        
+        i -= 1
+    
+    return equipFrame,weaponFrame,armorFrame
 
 if __name__ == '__main__':
     Main.main()
