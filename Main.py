@@ -19,7 +19,7 @@ def main():
     print(Character)
     print("\n")
 
-    visual.Window(Character,1)
+    visual.main(Character,1)
 
 
 if __name__ == '__main__':
