@@ -1221,16 +1221,18 @@ def Foci(type, Psy, foci, skillCheck):
         a = 23
         while a > 0:
             while run:
-                rand = random.randint(0, 22)
+                rand = random.randint(0, 23)
 
                 if randoNum[rand] == 0:
                     run = False
 
             for x in range(0, 24):
-                if x == rand and foci[3][x] < 2:
+                if x == rand and x == 13 and foci[3][13] < 2 and foci[7][0] != 2 and foci[7][1] != 2:
+                    foci[3][13] += 1
+                    a = 0
+                elif x == rand and foci[3][x] < 2:
                     foci[3][x] += 1
                     a = 0
-                
                 elif x == rand and foci[3][x] == 2:
                     randoNum[x] = -1
                     run = True
@@ -1479,7 +1481,7 @@ def Foci(type, Psy, foci, skillCheck):
 
     # Iron Hide [12], skillcheck[12] Does not have a free skill
 
-    if foci[3][13] == 1 and skillCheck[13] == 0:
+    if foci[3][13] == 1 and skillCheck[13] == 0 and foci[7][0] != 2 and foci[7][1] != 2:
         foci[3] = Skills(2, foci[3])
         skillCheck[13] = -1
 

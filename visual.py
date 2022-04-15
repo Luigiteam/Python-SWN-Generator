@@ -4,22 +4,22 @@
 class main:
     
     import tkinter as tk
+    from tkinter import filedialog
     import mainLine
     import gen
 
+    
+    
     run = True
 
     window = None
 
     Abillities = None
 
-    def __init__(self,Abillities,level):
+    windowX = 0
+    windowY = 5
 
-        # SAVE: array[4] P[0],E[1], and M[2]. array [5] AC[0], and AB[1] 
-        # array [6], Effort[0], FullName[1], Backprint[2], and BackprintNUM[3],
-        # array [7][War[0], Exp[1], and Psy[2],
-        # Credits[8],Equipment[9],
-        # Array[10] hp[0], ss[1]
+    def __init__(self,Abillities,level):
 
         self.Abillities = Abillities
 
@@ -112,14 +112,260 @@ class main:
                 activebackground="#dbdbdb",
                 border=1
                 ).place(x=attributes_X_Width - 150,y=80)
+            
+            self.tk.Button(
+                self.window,
+                text="Press Me To Save to TXT",
+                command=self.save,
+                width=20,
+                height=5,
+                font=("Arial",9),
+                bg="#dbdbdb",
+                activebackground="#dbdbdb",
+                border=1
+            ).place(x=attributes_X_Width - 300,y=80)
 
-            self.window.geometry("975x600+0+5")
+            self.window.geometry("975x600+" + str(self.windowX) + "+" + str(self.windowY))
             self.window.resizable(0,0)
 
             self.window.mainloop()
 
+    def save(self):
+        # array[4] SAVE: P[0],E[1], and M[2]. 
+        # array [5] AC[0], and AB[1] 
+        # array [6], Effort[0], FullName[1], Backprint[2], and BackprintNUM[3],
+        # array [7][War[0], Exp[1], and Psy[2],
+        # Credits[8],Equipment[9],
+        # Array[10] hp[0], ss[1]
+
+        import os
+
+        
+        charTXT = "Character " + str(self.Abillities[6][1]) + ".txt"
+        direct = self.filedialog.askdirectory()
+
+        with open(os.path.join(direct, charTXT), "w") as txt:
+            txt.write(self.Abillities[6][1] + "\n") #Full Name
+            txt.write(self.Abillities[6][2] + "\n\n") #Backprint
+
+            txt.write("HP: " + str(self.Abillities[10][0]) + "/" + str(self.Abillities[10][0]) + "\n") #HP
+            txt.write("SS: " + "0/" + str(self.Abillities[10][1]) + "\n\n")
+
+            txt.write("AC: " + str(self.Abillities[5][0]) + "\n") #AC AB
+            txt.write("AB: " + str(self.Abillities[5][1]) + "\n\n")
+
+            #Class Phase
+            txt.write("Class:\n")
+            if self.Abillities[7][0] == 2:
+                txt.write("    Full Warrior\n\n")
+            elif self.Abillities[7][1] == 2:
+                txt.write("    Full Expert\n\n")
+            elif self.Abillities[7][2] == 2:
+                txt.write("    Full Psychic\n\n")
+            elif self.Abillities[7][0] == 1 and self.Abillities[7][1] == 1:
+                txt.write("    Half Warrior, Half Expert\n\n")
+            elif self.Abillities[7][0] == 1 and self.Abillities[7][2] == 1:
+                txt.write("    Half Warrior, Half Psychic\n\n")
+            else:
+                txt.write("    Half Expert, Half Psychic\n\n")
+            
+            #txt.write("Max Effort: " + str(self.Abillities[6][0]) + "\n\n") #Effort
+
+            #Saves Phase
+            txt.write("Saves:\n")
+            txt.write("    Physical: " + str(self.Abillities[4][0]) + "\n")
+            txt.write("    Envasion: " + str(self.Abillities[4][1]) + "\n")
+            txt.write("    Mental: " + str(self.Abillities[4][2]) + "\n\n")
+
+            #Attributes Phase
+            txt.write("Attributes:\n")
+
+            txt.write("    STR: " + str(self.Abillities[0][0]) + self.gen.attribute_mod(1,self.Abillities[0][0]) + "\n")
+
+            txt.write("    DEX: " + str(self.Abillities[0][1]) + self.gen.attribute_mod(1,self.Abillities[0][1]) + "\n")
+
+            txt.write("    CON: " + str(self.Abillities[0][2]) + self.gen.attribute_mod(1,self.Abillities[0][2]) + "\n")
+
+            txt.write("    INT: " + str(self.Abillities[0][3]) + self.gen.attribute_mod(1,self.Abillities[0][3]) + "\n")
+
+            txt.write("    WIS: " + str(self.Abillities[0][4]) + self.gen.attribute_mod(1,self.Abillities[0][4]) + "\n")
+
+            txt.write("    CHA: " + str(self.Abillities[0][5]) + self.gen.attribute_mod(1,self.Abillities[0][5]) + "\n")
+
+            #Skills
+            txt.write("\nSkills:\n")
+            
+            if self.Abillities[1][0] > -1:
+                txt.write("    Administer: " + str(self.Abillities[1][0]) + "\n")
+            
+            if self.Abillities[1][1] > -1:
+                txt.write("    Connect: " + str(self.Abillities[1][1] )+ "\n")
+            
+            if self.Abillities[1][2] > -1:
+                txt.write("    Exert: " + str(self.Abillities[1][2] )+ "\n")
+
+            if self.Abillities[1][3] > -1:
+                txt.write("    Fix: " + str(self.Abillities[1][3] )+ "\n")
+
+            if self.Abillities[1][4] > -1:
+                txt.write("    Heal: " + str(self.Abillities[1][4] )+ "\n")
+
+            if self.Abillities[1][5] > -1:
+                txt.write("    Know: " + str(self.Abillities[1][5] )+ "\n")
+            
+            if self.Abillities[1][6] > -1:
+                txt.write("    Lead: " + str(self.Abillities[1][6] )+ "\n")
+            
+            if self.Abillities[1][7] > -1:
+                txt.write("    Notice: " + str(self.Abillities[1][7] )+ "\n")
+            
+            if self.Abillities[1][8] > -1:
+                txt.write("    Perform: " + str(self.Abillities[1][8] )+ "\n")
+            
+            if self.Abillities[1][9] > -1:
+                txt.write("    Pilot: " + str(self.Abillities[1][9] )+ "\n")
+            
+            if self.Abillities[1][10] > -1:
+                txt.write("    Program: " + str(self.Abillities[1][10]) + "\n")
+            
+            if self.Abillities[1][11] > -1:
+                txt.write("    Puch: " + str(self.Abillities[1][11]) + "\n")
+            
+            if self.Abillities[1][12] > -1:
+                txt.write("    Shoot: " + str(self.Abillities[1][12] )+ "\n")
+            
+            if self.Abillities[1][13] > -1:
+                txt.write("    Sneak: " + str(self.Abillities[1][13]) + "\n")
+            
+            if self.Abillities[1][14] > -1:
+                txt.write("    Stab: " + str(self.Abillities[1][14]) + "\n")
+            
+            if self.Abillities[1][15] > -1:
+                txt.write("    Survive: " + str(self.Abillities[1][15]) + "\n")
+            
+            if self.Abillities[1][16] > -1:
+                txt.write("    Talk: " + str(self.Abillities[1][16] )+ "\n")
+            
+            if self.Abillities[1][17] > -1:
+                txt.write("    Trade: " + str(self.Abillities[1][17]) + "\n")
+            
+            if self.Abillities[1][18] > -1:
+                txt.write("    Work: " + str(self.Abillities[1][18]) + "\n")
+            
+            if self.Abillities[7][2] > 0:
+                txt.write("\nPsychic Skills:\n")
+
+                if self.Abillities[2][0] > -1:
+                    txt.write("   Biopsionics: " + str(self.Abillities[2][0]) + "\n")
+
+                if self.Abillities[2][1] > -1:
+                    txt.write("   Metapsionics: " + str(self.Abillities[2][1]) + "\n")
+
+                if self.Abillities[2][2] > -1:
+                    txt.write("   Precognition: " + str(self.Abillities[2][2]) + "\n")
+                
+                if self.Abillities[2][3] > -1:
+                    txt.write("   Telekinesis: " + str(self.Abillities[2][3]) + "\n")
+                
+                if self.Abillities[2][4] > -1:
+                    txt.write("   Telepathy: " + str(self.Abillities[2][4]) + "\n")
+
+                if self.Abillities[2][5] > -1:
+                    txt.write("    Teleportation: " + str(self.Abillities[2][5]) + "\n")
+
+            #Foci Phase
+            txt.write("\nFoci:\n")
+
+            print(self.Abillities[3])
+
+            if self.Abillities[3][0] > 0:
+                txt.write("    Alert: " + str(self.Abillities[3][0]) + "\n")
+            
+            if self.Abillities[3][1] > 0:
+                txt.write("    Armsman: " + str(self.Abillities[3][1]) + "\n")
+            
+            if self.Abillities[3][2] > 0:
+                txt.write("    Assassin: " + str(self.Abillities[3][2]) + "\n")
+            
+            if self.Abillities[3][3] > 0:
+                txt.write("    Authority: " + str(self.Abillities[3][3]) + "\n")
+            
+            if self.Abillities[3][4] > 0:
+                txt.write("    Close Combatant: " + str(self.Abillities[3][4]) + "\n")
+            
+            if self.Abillities[3][5] > 0:
+                txt.write("    Connected: " + str(self.Abillities[3][5]) + "\n")
+            
+            if self.Abillities[3][6] > 0:
+                txt.write("    Die Hard: " + str(self.Abillities[3][6]) + "\n")
+            
+            if self.Abillities[3][7] > 0:
+                txt.write("    Diplomat: " + str(self.Abillities[3][7]) + "\n")
+            
+            if self.Abillities[3][8] > 0:
+                txt.write("    Gunslinger: " + str(self.Abillities[3][8]) + "\n")
+            
+            if self.Abillities[3][9] > 0:
+                txt.write("    Hacker: " + str(self.Abillities[3][9]) + "\n")
+            
+            if self.Abillities[3][10] > 0:
+                txt.write("    Healer: " + str(self.Abillities[3][10]) + "\n")
+            
+            if self.Abillities[3][11] > 0:
+                txt.write("    Henchkeeper: " + str(self.Abillities[3][11]) + "\n")
+            
+            if self.Abillities[3][12] > 0:
+                txt.write("    Iron Hide: " + str(self.Abillities[3][12]) + "\n")
+            
+            if self.Abillities[3][13] > 0:
+                txt.write("    Psychic Training: " + str(self.Abillities[3][13]) + "\n")
+            
+            if self.Abillities[3][14] > 0:
+                txt.write("    Savage Fray: " + str(self.Abillities[3][14]) + "\n")
+            
+            if self.Abillities[3][15] > 0:
+                txt.write("    Shocking Assault: " + str(self.Abillities[3][15]) + "\n")
+            
+            if self.Abillities[3][16] > 0:
+                txt.write("    Sniper: " + str(self.Abillities[3][16]) + "\n")
+            
+            if self.Abillities[3][17] > 0:
+                txt.write("    Specialist: " + str(self.Abillities[3][17]) + "\n")
+            
+            if self.Abillities[3][18] > 0:
+                txt.write("    Star Captain: " + str(self.Abillities[3][18]) + "\n")
+            
+            if self.Abillities[3][19] > 0:
+                txt.write("    Starfarer: " + str(self.Abillities[3][19]) + "\n")
+
+            if self.Abillities[3][20]:
+                txt.write("    Tinker: " + str(self.Abillities[3][20]) + "\n")
+            
+            if self.Abillities[3][21] > 0:
+                txt.write("    Unarmed Combatant: " + str(self.Abillities[3][21]) + "\n")
+            
+            if self.Abillities[3][22] > 0:
+                txt.write("    Wonderer : " + str(self.Abillities[3][22]) + "\n")
+            
+            if self.Abillities[3][23] > 0:
+                txt.write("    Wild Psychic Talent: " + str(self.Abillities[3][23]) + "\n")
+
+            #Equipment Phase
+            txt.write("\nEquipment:\n")
+            for x in self.Abillities[9]:
+                txt.write("    " + x + "\n")
+
+            #Credits
+            txt.write("\n" + str(self.Abillities[8]) + " Credits")
+
+
+        
+
     def reshuffle(self):
         self.run = True
+        self.window.update_idletasks()
+        self.windowX = self.window.winfo_x()
+        self.windowY = self.window.winfo_y()
         self.window.destroy()
         self.Abillities = self.mainLine.Gen()
 

@@ -96,7 +96,7 @@ def Gen():
     Abillities = [[STR, DEX, CON, INT, WIS, CHA],
                   [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
                   [-1, -1, -1, -1, -1, -1], 
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
     Abillities = gen.background_table(BackprintNUM, rollGrowth, rollLearn, Abillities)
 
@@ -128,7 +128,7 @@ def Gen():
     chaMOD = gen.attribute_mod(1, CHA)
 
     # Foci Stage
-    skill_Check = [0,0,0,0,0,0,0,-1,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0]
+    skill_Check = [0,0,0,0,0,0,0,-1,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0]
 
     Abillities,skill_Check = gen.Foci(0, Psy, Abillities, skill_Check)
 
@@ -223,7 +223,7 @@ def Gen():
     print("CHA: " + str(CHA) + chaMOD)
 
     print("Skills:  ")
-    print(Abillities[1])
+    print(Abillities)
     # SAVE: array[4] P[0],E[0], and M[0]. array [5] AC[0], and AB[1] 
     # array [6], Effort[0], FullName[1], Backprint[2], and BackprintNUM[3],
     # array [7][War[0], Exp[1], and Psy[2],
