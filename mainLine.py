@@ -128,15 +128,14 @@ def Gen():
     chaMOD = gen.attribute_mod(1, CHA)
 
     # Foci Stage
-    skill_Check = [0,0,0,0,0,0,0,-1,0,0,0,-1,0,0,0,0,0,0,0,0,0,0,0,0]
+    fociCheck = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
-    Abillities,skill_Check = gen.Foci(0, Psy, Abillities, skill_Check)
-
+    Abillities,fociCheck = gen.Foci(0, Psy, Abillities, fociCheck)
     if Exp >= 1:
-        Abillities,skill_Check = gen.Foci(2, Psy, Abillities, skill_Check)
+        Abillities,fociCheck = gen.Foci(2, Psy, Abillities, fociCheck)
 
     if War >= 1:
-        Abillities,skill_Check = gen.Foci(1, Psy, Abillities, skill_Check)
+        Abillities,fociCheck = gen.Foci(1, Psy, Abillities, fociCheck)
 
     # Extra Skill
 

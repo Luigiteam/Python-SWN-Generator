@@ -31,7 +31,7 @@ class main:
                 
             self.run = False
             
-            self.window.title("SWN Character Generator 1.0")
+            self.window.title("SWN Character Generator 1.1.1")
 
             # Has Name, Level and class, background, hp and ss
             Other = self.tk.Frame(self.window,bd=9,highlightbackground="black",highlightthickness=2,height=175,width=150)

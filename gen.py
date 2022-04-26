@@ -16,6 +16,7 @@ def attribute_gen():
 
 
 def attribute_mod(type, att):
+    """att is the Attribute you want to use"""
     """If Given 0 for the type, it'll return an int of the mod"""
     """If Given 1 for the type, it'll return a string of the mod"""
     if type == 0:
@@ -54,59 +55,60 @@ def attribute_mod(type, att):
 
 def background_pick(rand):
     """Returns the string form of a charactor's background"""
-    # Does not have Clergy, Courtesan, Dilettante and Politican backgrounds
+    """Does not have Clergy, Courtesan, Dilettante and Politican backgrounds"""
     if rand == 1:
         return "Barbarian"
 
-    if rand == 2:
+    elif rand == 2:
         return "Criminal"
 
-    if rand == 3:
+    elif rand == 3:
         return "Entertainer"
 
-    if rand == 4:
+    elif rand == 4:
         return "Merchant"
 
-    if rand == 5:
+    elif rand == 5:
         return "Noble"
 
-    if rand == 6:
+    elif rand == 6:
         return "Official"
 
-    if rand == 7:
+    elif rand == 7:
         return "Peasant"
 
-    if rand == 8:
+    elif rand == 8:
         return "Physician"
 
-    if rand == 9:
+    elif rand == 9:
         return "Pilot"
 
-    if rand == 10:
+    elif rand == 10:
         return "Scholar"
 
-    if rand == 11:
+    elif rand == 11:
         return "Soldier"
 
-    if rand == 12:
+    elif rand == 12:
         return "Spacer"
 
-    if rand == 13:
+    elif rand == 13:
         return "Technician"
 
-    if rand == 14:
+    elif rand == 14:
         return "Thug"
 
-    if rand == 15:
+    elif rand == 15:
         return "Vagabond"
 
-    if rand == 16:
+    else:
         return "Worker"
 
 
 def background_table(backnum, growth, learning, abilities):
     """This changes numbers in the array given 
        depending on what background is given"""
+    """# Does not have Clergy, Courtesan, Dilettante and Politican backgrounds"""
 
     # Barbarian
     if backnum == 1:
@@ -1021,7 +1023,7 @@ def background_table(backnum, growth, learning, abilities):
 def Att(type, abilities):
     """type - 0: This adds any attribute by 1
        type - 1: This adds pysical attributes by 2
-       type - 2: This adds metal attributes by 2"""
+       type - 2 or heigher: This adds metal attributes by 2"""
 
     # Any Attribute
     if type == 0:
@@ -1127,36 +1129,36 @@ def Skills(type, Skills):
     # Combat Skills
     if type == 1:
         a = 6
-        randoNum = [0, 0, 0]
+        randoNum = [0, 0, 0, 0]
         run = True
         while a > 0:
             while run:
-                rand = random.randint(1, 3)
+                rand = random.randint(0, 2)
 
-                if randoNum[rand - 1] == 0:
+                if randoNum[rand] == 0:
                     run = False
 
-            if rand == 1 and Skills[11] < 1:
+            if rand == 0 and Skills[11] < 1:
                 Skills[11] += 1
                 a = 0
 
-            elif rand == 2 and Skills[12] < 1:
+            elif rand == 1 and Skills[12] < 1:
                 Skills[12] += 1
                 a = 0
 
-            elif rand == 3 and Skills[14] < 1:
+            elif rand == 2 and Skills[14] < 1:
                 Skills[14] += 1
                 a = 0
 
-            elif rand == 1 and Skills[11] >= 1:
+            elif rand == 0 and Skills[11] >= 1:
                 randoNum[0] = -1
                 run = True
 
-            elif rand == 2 and Skills[12] >= 1:
+            elif rand == 1 and Skills[12] >= 1:
                 randoNum[1] = -1
                 run = True
 
-            elif rand == 3 and Skills[14] >= 1:
+            elif rand == 2 and Skills[14] >= 1:
                 randoNum[2] = -1
                 run = True
 
@@ -1217,17 +1219,18 @@ def Foci(type, Psy, foci, skillCheck):
     # Any Foci
     if type == 0:
         randoNum = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        print(len(foci[3]))
         run = True
         a = 23
         while a > 0:
             while run:
                 rand = random.randint(0, 23)
-
+                rand = 13
                 if randoNum[rand] == 0:
                     run = False
 
             for x in range(0, 24):
-                if x == rand and x == 13 and foci[3][13] < 2 and foci[7][0] != 2 and foci[7][1] != 2:
+                if x == rand and x == 13 and foci[3][13] < 2 and Psy >= 1:
                     foci[3][13] += 1
                     a = 0
                 elif x == rand and foci[3][x] < 2:
@@ -1481,7 +1484,7 @@ def Foci(type, Psy, foci, skillCheck):
 
     # Iron Hide [12], skillcheck[12] Does not have a free skill
 
-    if foci[3][13] == 1 and skillCheck[13] == 0 and foci[7][0] != 2 and foci[7][1] != 2:
+    if foci[3][13] == 1 and skillCheck[13] == 0 and Psy >= 1:
         foci[3] = Skills(2, foci[3])
         skillCheck[13] = -1
 
