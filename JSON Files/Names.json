@@ -484,12 +484,110 @@
         "Yamasaki"
     ],
     "LMF": [
-
+        "Agrippa",
+        "Appius",
+        "Aulus",
+        "Caeso",
+        "Decimus",
+        "Faustus",
+        "Gaius",
+        "Gnaeus",
+        "Hostus",
+        "Lucius",
+        "Mamercus",
+        "Manius",
+        "Marcus",
+        "Mettius",
+        "Nonus",
+        "Numerius",
+        "Opiter",
+        "Paulus",
+        "Proculus",
+        "Publisus",
+        "Quintus",
+        "Servius",
+        "Tiberius",
+        "Titus"
     ],
     "LFF":[
-
+        "Appia",
+        "Aula",
+        "Caesula",
+        "Decima",
+        "Fausta",
+        "Gaia",
+        "Gnaea",
+        "Hosta",
+        "Lucia",
+        "Maio",
+        "Marcia",
+        "Maxima",
+        "Mettia",
+        "Nona",
+        "Numeria",
+        "Octavia",
+        "Postuma",
+        "Prima",
+        "Procula",
+        "Septima",
+        "Servia",
+        "Tertia",
+        "Tiberia",
+        "Titia",
+        "Vibia"
     ],
     "LL":[
-        
+        "Antius",
+        "Aurius",
+        "Barbatius",
+        "Calidius",
+        "Cornelius",
+        "Decius",
+        "Fabius",
+        "Flavius",
+        "Galerius",
+        "Horatius",
+        "Julius",
+        "Juventius",
+        "Licinius",
+        "Marius",
+        "Minicius",
+        "Nerius",
+        "Octavius",
+        "Pompeius",
+        "Quinctius",
+        "Rutilius",
+        "Sextius",
+        "Titius",
+        "Ulpius",
+        "Valerius",
+        "Vitellius"
+    ], 
+    "NMF" : [
+
+    ],
+    "NFF" : [
+
+    ],
+    "NL" : [
+
+    ],
+    "RMF" : [
+
+    ],
+    "RFF" : [
+
+    ],
+    "RL" : [
+
+    ],
+    "SMF" : [
+
+    ],
+    "SFF" : [
+
+    ],
+    "SL" : [
+
     ]
 }
